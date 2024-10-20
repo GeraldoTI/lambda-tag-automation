@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - pip install --upgrade awscli
+  build:
+    commands:
+      - zip lambda_function.zip lambda_function.py
+      - aws s3 cp lambda_function.zip s3://nome-do-seu-bucket/lambda_function.zip
+
+artifacts:
+  files:
+    - lambda_function.zip
