@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - pip install --upgrade awscli
+  build:
+    commands:
+      - zip lambda_function.zip lambda_function.py
+      - aws s3 cp lambda_function.zip s3://lambda-deployment-${AWS_DEFAULT_REGION}/
+
+artifacts:
+  files:
+    - template.yaml
+    - lambda_function.zip
